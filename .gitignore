@@ -38,3 +38,4 @@ out/
 
 ### Visual Paradigm ###
 docs/visual-paradigm/*.bak*
+docs/visual-paradigm/*.lck
