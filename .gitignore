@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Visual Paradigm ###
+docs/visual-paradigm/*.bak*
+docs/visual-paradigm/*.lck
