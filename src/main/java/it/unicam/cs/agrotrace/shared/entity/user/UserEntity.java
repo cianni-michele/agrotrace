@@ -3,8 +3,6 @@ package it.unicam.cs.agrotrace.shared.entity.user;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
-
 @EqualsAndHashCode
 @ToString
 @Entity
