@@ -10,6 +10,11 @@ public abstract class AbstractAuthor extends AbstractUser implements Author {
     }
 
     @Override
+    public String getEmail() {
+        return this.getUsername();
+    }
+
+    @Override
     public boolean hasAccessTo(Content content) {
         return this.getId().equals(content.getAuthor().getId());
     }

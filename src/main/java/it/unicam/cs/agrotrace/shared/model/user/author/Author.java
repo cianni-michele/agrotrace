@@ -16,4 +16,11 @@ public interface Author {
      */
     String getName();
 
+    /**
+     * Returns the email of the author.
+     *
+     * @return the email of the author.
+     */
+    String getEmail();
+
 }
