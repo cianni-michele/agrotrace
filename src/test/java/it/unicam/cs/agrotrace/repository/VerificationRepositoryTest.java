@@ -20,13 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class VerificationRepositoryTest {
 
     @Autowired
-    private VerificationRepository underTest;
+    private VerificationRepository verificationRepository;
 
     @Test
     void findAllByContentId_shouldReturnEmptyListWhenNoVerificationsExist() {
         UUID contentId = UUID.randomUUID();
 
-        List<VerificationEntity> actual = underTest.findAllByContentId(contentId);
+        List<VerificationEntity> actual = verificationRepository.findAllByContentId(contentId);
 
         assertTrue(actual.isEmpty());
     }
@@ -35,9 +35,9 @@ public class VerificationRepositoryTest {
     void findAllByContentId_shouldReturnListWhenVerificationsExist() {
         VerificationEntity verification = VerificationTestUtils.buildVerificationEntity(null);
 
-        underTest.save(verification);
+        verificationRepository.save(verification);
 
-        List<VerificationEntity> actual = underTest.findAllByContentId(TEST_CONTENT_ID);
+        List<VerificationEntity> actual = verificationRepository.findAllByContentId(TEST_CONTENT_ID);
 
         assertFalse(actual.isEmpty());
     }
@@ -46,7 +46,7 @@ public class VerificationRepositoryTest {
     void findAllByCuratorId_shouldReturnEmptyListWhenNoVerificationsExist() {
         Long curatorId = 1L;
 
-        List<VerificationEntity> actual = underTest.findAllByCuratorId(curatorId);
+        List<VerificationEntity> actual = verificationRepository.findAllByCuratorId(curatorId);
 
         assertTrue(actual.isEmpty());
     }
@@ -55,9 +55,9 @@ public class VerificationRepositoryTest {
     void findAllByCuratorId_shouldReturnListWhenVerificationsExist() {
         VerificationEntity verification = VerificationTestUtils.buildVerificationEntity(null);
 
-        underTest.save(verification);
+        verificationRepository.save(verification);
 
-        List<VerificationEntity> actual = underTest.findAllByCuratorId(TEST_CURATOR_ID);
+        List<VerificationEntity> actual = verificationRepository.findAllByCuratorId(TEST_CURATOR_ID);
 
         assertFalse(actual.isEmpty());
     }
