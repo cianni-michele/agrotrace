@@ -6,8 +6,10 @@ import it.unicam.cs.agrotrace.exception.ContentNotFoundException;
 import it.unicam.cs.agrotrace.security.context.support.WithCuratorUser;
 import it.unicam.cs.agrotrace.service.ContentService;
 import it.unicam.cs.agrotrace.service.VerificationService;
+import it.unicam.cs.agrotrace.service.notification.NotificationService;
 import it.unicam.cs.agrotrace.shared.model.content.Content;
 import it.unicam.cs.agrotrace.shared.model.content.ValidationStatus;
+import it.unicam.cs.agrotrace.shared.model.verification.Verification;
 import it.unicam.cs.agrotrace.util.mapper.user.author.AuthorMapper;
 import it.unicam.cs.agrotrace.util.mapper.content.ContentMapper;
 import org.junit.jupiter.api.Nested;
@@ -53,8 +55,12 @@ class ContentControllerTest {
     private static final Content TEST_PROCESS_CONTENT = buildTestProcessContent(UUID.randomUUID(), TEST_TRANSFORMER_ID, PENDING);
     private static final Content TEST_PRODUCT_MODEL = buildTestProductModel(UUID.randomUUID(), TEST_PRODUCER_ID, REJECTED);
     private static final Content TEST_BUNDLE_CONTENT = buildTestBundleContent(UUID.randomUUID(), TEST_DISTRIBUTOR_ID, APPROVED);
+
     @Autowired
     private MockMvc mvc;
+
+    @MockitoBean
+    private NotificationService notificationService;
 
     @MockitoBean
     private VerificationService verificationService;
@@ -78,6 +84,7 @@ class ContentControllerTest {
 
             verify(contentService, never()).save(any(Content.class));
             verify(verificationService, never()).createVerification(any(Long.class), any(UUID.class), anyString());
+            verify(notificationService, never()).notifyAuthor(any(Verification.class));
         }
 
         @Test
@@ -97,6 +104,7 @@ class ContentControllerTest {
 
             verify(contentService, never()).save(any(Content.class));
             verify(verificationService, never()).createVerification(any(Long.class), any(UUID.class), anyString());
+            verify(notificationService, never()).notifyAuthor(any(Verification.class));
         }
 
         @Test
@@ -104,10 +112,12 @@ class ContentControllerTest {
         void shouldReturnStatusNoContent_whenApproved() throws Exception {
             UUID contentId = TEST_CONTENT_ID;
             Content content = mock(Content.class);
+            Verification verification = mock(Verification.class);
 
             when(contentService.findById(contentId)).thenReturn(content);
             when(content.getValidationStatus()).thenReturn(PENDING);
             when(contentService.save(content)).thenReturn(content);
+            when(verificationService.createVerification(any(Long.class), any(UUID.class), anyString())).thenReturn(verification);
 
             var request = put("/api/content/" + contentId + "/validate")
                     .contentType(MediaType.APPLICATION_JSON)
@@ -117,8 +127,7 @@ class ContentControllerTest {
 
             mvc.perform(request).andExpect(status().isNoContent());
 
-            verify(contentService).save(content);
-            verify(verificationService).createVerification(any(Long.class), any(UUID.class), anyString());
+            verify(notificationService).notifyAuthor(any(Verification.class));
         }
 
 
@@ -127,9 +136,12 @@ class ContentControllerTest {
         void shouldReturnStatusNoContent_whenRejected() throws Exception {
             UUID contentId = TEST_CONTENT_ID;
             Content content = mock(Content.class);
+            Verification verification = mock(Verification.class);
 
             when(contentService.findById(contentId)).thenReturn(content);
             when(content.getValidationStatus()).thenReturn(PENDING);
+            when(contentService.save(content)).thenReturn(content);
+            when(verificationService.createVerification(any(Long.class), any(UUID.class), anyString())).thenReturn(verification);
 
             var request = put("/api/content/" + contentId + "/validate")
                     .contentType(MediaType.APPLICATION_JSON)
@@ -139,8 +151,7 @@ class ContentControllerTest {
 
             mvc.perform(request).andExpect(status().isNoContent());
 
-            verify(contentService).save(content);
-            verify(verificationService).createVerification(any(Long.class), any(UUID.class), anyString());
+            verify(notificationService).notifyAuthor(any(Verification.class));
         }
     }
 

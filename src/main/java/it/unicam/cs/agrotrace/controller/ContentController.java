@@ -3,11 +3,13 @@ package it.unicam.cs.agrotrace.controller;
 import it.unicam.cs.agrotrace.exception.UnauthorizedOperationException;
 import it.unicam.cs.agrotrace.rest.request.ValidationRequest;
 import it.unicam.cs.agrotrace.service.VerificationService;
+import it.unicam.cs.agrotrace.service.notification.NotificationService;
 import it.unicam.cs.agrotrace.shared.model.content.Content;
 import it.unicam.cs.agrotrace.shared.model.content.ValidationStatus;
 import it.unicam.cs.agrotrace.shared.model.user.admin.Curator;
 import it.unicam.cs.agrotrace.service.ContentService;
 import it.unicam.cs.agrotrace.rest.view.ContentView;
+import it.unicam.cs.agrotrace.shared.model.verification.Verification;
 import it.unicam.cs.agrotrace.util.mapper.content.ContentMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,17 @@ public class ContentController {
 
     private final VerificationService verificationService;
 
+    private final NotificationService notificationService;
+
     private final ContentMapper contentMapper;
 
-    public ContentController(ContentService contentService, VerificationService verificationService, ContentMapper contentMapper) {
+    public ContentController(ContentService contentService,
+                             VerificationService verificationService,
+                             NotificationService notificationService,
+                             ContentMapper contentMapper) {
         this.contentService = contentService;
         this.verificationService = verificationService;
+        this.notificationService = notificationService;
         this.contentMapper = contentMapper;
     }
 
@@ -71,7 +79,8 @@ public class ContentController {
         ValidationStatus status = ValidationStatus.valueOf(request.getValidationCode());
         curator.validate(content, status);
         contentService.save(content);
-        verificationService.createVerification(curator.getId(), contentId, request.getComments());
+        Verification verification = verificationService.createVerification(curator.getId(), contentId, request.getComments());
+        notificationService.notifyAuthor(verification);
 
         return ResponseEntity.noContent().build();
     }
