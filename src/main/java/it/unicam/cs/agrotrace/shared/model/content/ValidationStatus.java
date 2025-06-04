@@ -1,7 +1,5 @@
 package it.unicam.cs.agrotrace.shared.model.content;
 
-import java.util.Optional;
-
 public enum ValidationStatus {
     PENDING,
     NEEDS_CORRECTION,
