@@ -1,5 +1,6 @@
 package it.unicam.cs.agrotrace.config.mail;
 
+import it.unicam.cs.agrotrace.service.notification.strategy.EmailNotificationStrategy;
 import it.unicam.cs.agrotrace.service.notification.strategy.MockNotificationStrategy;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,11 @@ class NotificationStrategyProfilesInjectionIntegrationTest {
         @Test
         void shouldLoadMockStrategy() {
             assertNotNull(context.getBean(MockNotificationStrategy.class));
+        }
+
+        @Test
+        void shouldLoadEmailStrategy() {
+            assertNotNull(context.getBean(EmailNotificationStrategy.class));
         }
     }
 
