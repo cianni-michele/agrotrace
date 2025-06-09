@@ -1,29 +1,29 @@
-### Nome
+## Nome
 
 Validare Contenuto
 
 ---
 
-### ID
+## ID
 
 UC-05
 
 ---
 
-### Descrizione
+## Descrizione
 
 Il Curatore esamina e verifica i contenuti caricati dagli attori commerciali (schede prodotto, processi di trasformazione, pacchetti tipicità),  
 approvandoli o respingendoli in base alle policy di qualità della piattaforma prima che siano pubblicati.
 
 ---
 
-### Attori primari
+## Attori primari
 
 - Curatore
 
 ---
 
-### Attori secondari
+## Attori secondari
 
 - Produttore (autore del contenuto)
 - Trasformatore (autore del contenuto)
@@ -31,14 +31,14 @@ approvandoli o respingendoli in base alle policy di qualità della piattaforma p
 
 ---
 
-### Pre‑condizioni
+## Pre‑condizioni
 
 - Il Curatore è autenticato con ruolo “Curatore”.
 - Esiste almeno un contenuto in stato **In revisione**.
 
 ---
 
-### Flusso principale (Scenario di successo)
+## Flusso principale (Scenario di successo)
 
 1. Il Curatore apre il pannello **Contenuti da approvare**.
 2. Il Sistema elenca i contenuti pendenti con metadati (tipo, autore, data caricamento).
@@ -49,12 +49,11 @@ approvandoli o respingendoli in base alle policy di qualità della piattaforma p
 7. Il Sistema:  
    7.1 Imposta lo stato del contenuto a **Pubblicato**;  
    7.2 Notifica l’autore del contenuto dell’avvenuta pubblicazione;  
-   7.3 Rende immediatamente visibile il contenuto agli utenti finali.  
-8. Il Curatore ripete i passi 3–7 finché non vi sono più contenuti da validare.
+   7.3 Rende immediatamente visibile il contenuto agli utenti finali.
 
 ---
 
-### Post‑condizioni
+## Post‑condizioni
 
 - Il contenuto validato è nello stato **Pubblicato** ed accessibile secondo le regole di visibilità.
 - Gli autori hanno ricevuto notifica dell’esito.
@@ -62,7 +61,7 @@ approvandoli o respingendoli in base alle policy di qualità della piattaforma p
 
 ---
 
-### Flussi alternativi (Eccezioni)
+## Flussi alternativi (Eccezioni)
 
 **3a. Contenuto già validato**
 
