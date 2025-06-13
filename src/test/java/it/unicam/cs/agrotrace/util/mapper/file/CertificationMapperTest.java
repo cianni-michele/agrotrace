@@ -2,7 +2,6 @@ package it.unicam.cs.agrotrace.util.mapper.file;
 
 import it.unicam.cs.agrotrace.shared.entity.file.CertificationEntity;
 import it.unicam.cs.agrotrace.shared.model.file.Certification;
-import it.unicam.cs.agrotrace.util.UploadedFileTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ class CertificationMapperTest {
 
     @Test
     void entityFromModel() {
-        Certification model = buildTestCertificationUploadedFile();
+        Certification model = buildTestCertificationUploadedFile(null);
 
         CertificationEntity entity = certificationMapper.entityFromModel(model);
 

@@ -21,7 +21,7 @@ class ImageMapperTest {
 
     @Test
     void entityFromModel() {
-        Image model = buildTestImageUploadedFile();
+        Image model = buildTestImageUploadedFile(null);
 
         ImageEntity entity = imageMapper.entityFromModel(model);
 

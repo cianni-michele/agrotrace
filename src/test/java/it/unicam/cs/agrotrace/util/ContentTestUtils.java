@@ -52,8 +52,8 @@ public final class ContentTestUtils {
                 .description(TEST_CONTENT_DESCRIPTION)
                 .price(10.0)
                 .quantity(2)
-                .images(List.of(buildTestImageUploadedFile()))
-                .certifications(List.of(buildTestCertificationUploadedFile()))
+                .images(List.of(buildTestImageUploadedFile(TEST_FILE_ID)))
+                .certifications(List.of(buildTestCertificationUploadedFile(TEST_FILE_ID)))
                 .build();
     }
 
