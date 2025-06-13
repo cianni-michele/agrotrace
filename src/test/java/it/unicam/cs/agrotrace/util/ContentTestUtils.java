@@ -7,9 +7,11 @@ import it.unicam.cs.agrotrace.shared.entity.content.ProcessEntity;
 import it.unicam.cs.agrotrace.shared.model.content.*;
 import it.unicam.cs.agrotrace.shared.model.content.Process;
 
+import java.util.List;
 import java.util.UUID;
 
 import static it.unicam.cs.agrotrace.util.AuthorTestUtils.*;
+import static it.unicam.cs.agrotrace.util.UploadedFileTestUtils.*;
 
 public final class ContentTestUtils {
 
@@ -41,13 +43,17 @@ public final class ContentTestUtils {
                 .build();
     }
 
-    public static Content buildTestProductModel(UUID contentId, Long authorId, ValidationStatus status) {
+    public static Product buildTestProductContent(UUID contentId, Long authorId, ValidationStatus status) {
         return Product.builder()
                 .id(contentId)
                 .author(buildTestProducerAuthor(authorId))
                 .validationStatus(status)
                 .title(TEST_CONTENT_TITLE)
                 .description(TEST_CONTENT_DESCRIPTION)
+                .price(10.0)
+                .quantity(2)
+                .images(List.of(buildTestImageUploadedFile()))
+                .certifications(List.of(buildTestCertificationUploadedFile()))
                 .build();
     }
 
@@ -61,13 +67,17 @@ public final class ContentTestUtils {
         return processEntity;
     }
 
-    public static ContentEntity buildTestProductEntity(UUID contentId, Long authorId) {
+    public static ProductEntity buildTestProductEntity(UUID contentId, Long authorId) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setId(contentId);
         productEntity.setAuthor(buildTestProducerEntity(authorId));
         productEntity.setTitle(TEST_CONTENT_TITLE);
         productEntity.setDescription(TEST_CONTENT_DESCRIPTION);
         productEntity.setValidationStatus(TEST_CONTENT_PENDING);
+        productEntity.setPrice(10.0);
+        productEntity.setQuantity(2);
+        productEntity.setImages(List.of(buildTestImageEntity()));
+        productEntity.setCertifications(List.of(buildTestCertificationEntity()));
         return productEntity;
     }
 
