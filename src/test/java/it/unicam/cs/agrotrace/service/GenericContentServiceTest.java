@@ -98,7 +98,7 @@ class GenericContentServiceTest {
 
         when(contentRepository.findById(contentId)).thenReturn(Optional.of(contentEntity));
 
-        Content expectedContent = buildTestProductModel(contentId, authorId, ValidationStatus.PENDING);
+        Content expectedContent = buildTestProductContent(contentId, authorId, ValidationStatus.PENDING);
         Content actualContent = contentService.findById(contentId);
 
         assertEquals(expectedContent, actualContent);
@@ -130,7 +130,7 @@ class GenericContentServiceTest {
 
         List<Content> expectedContents = List.of(
                 buildTestProcessContent(contentId1, authorId1, ValidationStatus.PENDING),
-                buildTestProductModel(contentId2, authorId2, ValidationStatus.PENDING)
+                buildTestProductContent(contentId2, authorId2, ValidationStatus.PENDING)
         );
         List<Content> actualContents = contentService.findAll(status);
         assertEquals(expectedContents, actualContents);
@@ -175,7 +175,7 @@ class GenericContentServiceTest {
 
     @Test
     void save_shouldReturnSavedProduct() {
-        Content content = buildTestProductModel(null, TEST_PRODUCER_ID, ValidationStatus.PENDING);
+        Content content = buildTestProductContent(null, TEST_PRODUCER_ID, ValidationStatus.PENDING);
         ContentEntity savedContentEntity = buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID);
 
         when(contentRepository.save(any(ContentEntity.class))).thenReturn(savedContentEntity);

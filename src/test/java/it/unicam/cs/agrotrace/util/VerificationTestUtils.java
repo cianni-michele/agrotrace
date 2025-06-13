@@ -24,7 +24,7 @@ public final class VerificationTestUtils {
     public static Verification buildVerificationModel(Long idVerification) {
         return Verification.builder()
                 .id(idVerification)
-                .content(buildTestProductModel(TEST_CONTENT_ID, TEST_PRODUCER_ID, ValidationStatus.PENDING))
+                .content(buildTestProductContent(TEST_CONTENT_ID, TEST_PRODUCER_ID, ValidationStatus.PENDING))
                 .curator(buildTestCuratorModel(TEST_CURATOR_ID))
                 .comments(TEST_COMMENT)
                 .build();
