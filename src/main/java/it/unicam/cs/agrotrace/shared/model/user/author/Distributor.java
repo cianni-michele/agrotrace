@@ -1,7 +1,11 @@
 package it.unicam.cs.agrotrace.shared.model.user.author;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class Distributor extends AbstractAuthor {
 
     @Builder

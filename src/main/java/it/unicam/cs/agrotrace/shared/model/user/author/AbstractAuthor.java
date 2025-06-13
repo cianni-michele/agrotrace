@@ -2,7 +2,11 @@ package it.unicam.cs.agrotrace.shared.model.user.author;
 
 import it.unicam.cs.agrotrace.shared.model.content.Content;
 import it.unicam.cs.agrotrace.shared.model.user.AbstractUser;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public abstract class AbstractAuthor extends AbstractUser implements Author {
 
     protected AbstractAuthor(Long id, String name, String username, String password, Role role) {
