@@ -1,7 +1,6 @@
-package it.unicam.cs.agrotrace.rest.controller;
+package it.unicam.cs.agrotrace.controller;
 
 import it.unicam.cs.agrotrace.config.TestSecurityConfig;
-import it.unicam.cs.agrotrace.controller.ContentController;
 import it.unicam.cs.agrotrace.exception.ContentNotFoundException;
 import it.unicam.cs.agrotrace.security.context.support.WithCuratorUser;
 import it.unicam.cs.agrotrace.service.ContentService;
@@ -53,7 +52,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ContentControllerTest {
 
     private static final Content TEST_PROCESS_CONTENT = buildTestProcessContent(UUID.randomUUID(), TEST_TRANSFORMER_ID, PENDING);
-    private static final Content TEST_PRODUCT_MODEL = buildTestProductModel(UUID.randomUUID(), TEST_PRODUCER_ID, REJECTED);
+    private static final Content TEST_PRODUCT_MODEL = buildTestProductContent(UUID.randomUUID(), TEST_PRODUCER_ID, REJECTED);
     private static final Content TEST_BUNDLE_CONTENT = buildTestBundleContent(UUID.randomUUID(), TEST_DISTRIBUTOR_ID, APPROVED);
 
     @Autowired
