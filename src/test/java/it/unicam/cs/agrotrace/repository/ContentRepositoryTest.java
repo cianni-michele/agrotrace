@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import static it.unicam.cs.agrotrace.util.AuthorTestUtils.*;
 import static it.unicam.cs.agrotrace.util.ContentTestUtils.*;
+import static it.unicam.cs.agrotrace.util.UploadedFileTestUtils.TEST_FILE_ID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -37,7 +38,7 @@ class ContentRepositoryTest {
 
     @Test
     void saveAndFindById_shouldPersistProductEntity() {
-        ContentEntity expected = buildTestProductEntity(null, TEST_PRODUCER_ID);
+        ContentEntity expected = buildTestProductEntity(null, TEST_PRODUCER_ID, TEST_FILE_ID, TEST_FILE_ID);
 
         expected = contentRepository.save(expected);
 
@@ -71,7 +72,7 @@ class ContentRepositoryTest {
 
     @Test
     void deleteById_shouldRemoveProductEntityFromDatabase() {
-        ContentEntity contentEntity = buildTestProductEntity(null, TEST_PRODUCER_ID);
+        ContentEntity contentEntity = buildTestProductEntity(null, TEST_PRODUCER_ID, TEST_FILE_ID, TEST_FILE_ID);
 
         contentEntity = contentRepository.save(contentEntity);
 
@@ -121,7 +122,7 @@ class ContentRepositoryTest {
 
     @Test
     void update_shouldUpdateProductEntity() {
-        ContentEntity contentEntity = buildTestProductEntity(null, TEST_PRODUCER_ID);
+        ContentEntity contentEntity = buildTestProductEntity(null, TEST_PRODUCER_ID, null, null);
         contentEntity = contentRepository.save(contentEntity);
 
         contentEntity.setValidationStatus(TEST_CONTENT_REJECTED);
