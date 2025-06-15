@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import static it.unicam.cs.agrotrace.util.AuthorTestUtils.*;
 import static it.unicam.cs.agrotrace.util.ContentTestUtils.*;
+import static it.unicam.cs.agrotrace.util.UploadedFileTestUtils.TEST_FILE_ID;
 import static it.unicam.cs.agrotrace.util.UserTestUtils.*;
 import static it.unicam.cs.agrotrace.util.VerificationTestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -163,7 +164,7 @@ class VerificationServiceImplTest {
                     .thenReturn(Optional.of(buildTestCuratorEntity(curatorId)));
 
             when(contentRepository.findById(contentId))
-                    .thenReturn(Optional.of(buildTestProductEntity(contentId, TEST_PRODUCER_ID)));
+                    .thenReturn(Optional.of(buildTestProductEntity(contentId, TEST_PRODUCER_ID, TEST_FILE_ID, TEST_FILE_ID)));
 
             when(verificationRepository.save(any(VerificationEntity.class)))
                     .thenReturn(buildVerificationEntity(idVerification));
