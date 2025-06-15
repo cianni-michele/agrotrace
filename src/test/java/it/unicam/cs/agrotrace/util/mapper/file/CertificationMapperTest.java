@@ -33,7 +33,7 @@ class CertificationMapperTest {
 
     @Test
     void modelFromEntity() {
-        CertificationEntity entity = buildTestCertificationEntity();
+        CertificationEntity entity = buildTestCertificationEntity(TEST_FILE_ID);
 
         Certification model = certificationMapper.modelFromEntity(entity);
 

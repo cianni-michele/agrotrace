@@ -11,6 +11,7 @@ import static it.unicam.cs.agrotrace.shared.model.content.ValidationStatus.*;
 import static it.unicam.cs.agrotrace.shared.model.content.ValidationStatus.PENDING;
 import static it.unicam.cs.agrotrace.util.AuthorTestUtils.TEST_PRODUCER_ID;
 import static it.unicam.cs.agrotrace.util.ContentTestUtils.*;
+import static it.unicam.cs.agrotrace.util.UploadedFileTestUtils.TEST_FILE_ID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductMapperTest {
@@ -43,7 +44,7 @@ class ProductMapperTest {
 
     @Test
     void modelFromEntity() {
-        ProductEntity entity = buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID);
+        ProductEntity entity = buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID, TEST_FILE_ID, TEST_FILE_ID);
 
         Product product = productMapper.modelFromEntity(entity);
 

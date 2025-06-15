@@ -1,16 +1,21 @@
 package it.unicam.cs.agrotrace.util.mapper.content;
 
+import it.unicam.cs.agrotrace.rest.request.ProductDetailsRequest;
 import it.unicam.cs.agrotrace.rest.view.ProductView;
 import it.unicam.cs.agrotrace.shared.entity.content.ProductEntity;
 import it.unicam.cs.agrotrace.shared.model.content.Product;
+import it.unicam.cs.agrotrace.shared.model.content.ProductDetails;
 import it.unicam.cs.agrotrace.shared.model.content.ValidationStatus;
+import it.unicam.cs.agrotrace.util.mapper.RequestMapper;
 import it.unicam.cs.agrotrace.util.mapper.file.CertificationMapper;
 import it.unicam.cs.agrotrace.util.mapper.file.ImageMapper;
 import it.unicam.cs.agrotrace.util.mapper.user.author.AuthorMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class ProductMapper extends AbstractContentMapper<ProductView, Product, ProductEntity> {
+public final class ProductMapper
+        extends AbstractContentMapper<ProductView, Product, ProductEntity>
+        implements RequestMapper<ProductDetailsRequest, ProductDetails> {
 
     private final ImageMapper imageMapper = new ImageMapper();
 
@@ -59,5 +64,15 @@ public final class ProductMapper extends AbstractContentMapper<ProductView, Prod
         view.setValidationStatus(model.getValidationStatus().name());
         view.setAuthorId(model.getAuthor().getId());
         return view;
+    }
+
+    @Override
+    public ProductDetails modelFromRequest(ProductDetailsRequest request) {
+        return new ProductDetails(
+                request.getTitle(),
+                request.getDescription(),
+                request.getPrice(),
+                request.getQuantity()
+        );
     }
 }

@@ -33,7 +33,7 @@ class ImageMapperTest {
 
     @Test
     void modelFromEntity() {
-        ImageEntity entity = buildTestImageEntity();
+        ImageEntity entity = buildTestImageEntity(TEST_FILE_ID);
 
         Image model = imageMapper.modelFromEntity(entity);
 
