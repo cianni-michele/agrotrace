@@ -36,6 +36,8 @@ public class SecurityConfig {
                     ).permitAll();
                     authorizeRequests.requestMatchers("/api/content/").authenticated();
                     authorizeRequests.requestMatchers("/api/content/{contentId}/validate").hasRole("CURATOR");
+                    authorizeRequests.requestMatchers("/api/product").authenticated();
+                    authorizeRequests.requestMatchers("/api/product/**").hasRole("PRODUCER");
                     authorizeRequests.anyRequest().authenticated();
                 })
                 .httpBasic(Customizer.withDefaults())
