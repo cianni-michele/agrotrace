@@ -7,6 +7,7 @@ import it.unicam.cs.agrotrace.shared.entity.content.ProcessEntity;
 import it.unicam.cs.agrotrace.shared.model.content.*;
 import it.unicam.cs.agrotrace.shared.model.content.Process;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,7 +68,10 @@ public final class ContentTestUtils {
         return processEntity;
     }
 
-    public static ProductEntity buildTestProductEntity(UUID contentId, Long authorId) {
+    public static ProductEntity buildTestProductEntity(UUID contentId,
+                                                       Long authorId,
+                                                       UUID imageId,
+                                                       UUID certificationId) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setId(contentId);
         productEntity.setAuthor(buildTestProducerEntity(authorId));
@@ -76,8 +80,8 @@ public final class ContentTestUtils {
         productEntity.setValidationStatus(TEST_CONTENT_PENDING);
         productEntity.setPrice(10.0);
         productEntity.setQuantity(2);
-        productEntity.setImages(List.of(buildTestImageEntity()));
-        productEntity.setCertifications(List.of(buildTestCertificationEntity()));
+        productEntity.setImages(new ArrayList<>(List.of(buildTestImageEntity(imageId))));
+        productEntity.setCertifications(new ArrayList<>(List.of(buildTestCertificationEntity(certificationId))));
         return productEntity;
     }
 

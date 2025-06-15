@@ -18,7 +18,7 @@ public final class UploadedFileTestUtils {
 
     public static Image buildTestImageUploadedFile(UUID imageId) {
         return Image.builder()
-                .id(imageId) // ID can be set to null for testing
+                .id(imageId)
                 .path(Path.of(TEST_IMAGE_PATH))
                 .description(TEST_IMAGE_DESCRIPTION)
                 .build();
@@ -26,23 +26,23 @@ public final class UploadedFileTestUtils {
 
     public static Certification buildTestCertificationUploadedFile(UUID certificationId) {
         return Certification.builder()
-                .id(certificationId) // ID can be set to null for testing
+                .id(certificationId)
                 .path(Path.of(TEST_CERTIFICATION_PATH))
                 .type(Certification.Type.BIO)
                 .build();
     }
 
-    public static ImageEntity buildTestImageEntity() {
+    public static ImageEntity buildTestImageEntity(UUID imageId) {
         ImageEntity imageEntity = new ImageEntity();
-        imageEntity.setId(TEST_FILE_ID);
+        imageEntity.setId(imageId);
         imageEntity.setPath(TEST_IMAGE_PATH);
         imageEntity.setDescription(TEST_IMAGE_DESCRIPTION);
         return imageEntity;
     }
 
-    public static CertificationEntity buildTestCertificationEntity() {
+    public static CertificationEntity buildTestCertificationEntity(UUID certificationId) {
         CertificationEntity certificationEntity = new CertificationEntity();
-        certificationEntity.setId(TEST_FILE_ID);
+        certificationEntity.setId(certificationId);
         certificationEntity.setPath(TEST_CERTIFICATION_PATH);
         certificationEntity.setType("BIO");
         return certificationEntity;

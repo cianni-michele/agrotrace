@@ -6,6 +6,7 @@ import it.unicam.cs.agrotrace.shared.model.verification.Verification;
 
 import static it.unicam.cs.agrotrace.util.AuthorTestUtils.TEST_PRODUCER_ID;
 import static it.unicam.cs.agrotrace.util.ContentTestUtils.*;
+import static it.unicam.cs.agrotrace.util.UploadedFileTestUtils.TEST_FILE_ID;
 import static it.unicam.cs.agrotrace.util.UserTestUtils.*;
 
 public final class VerificationTestUtils {
@@ -15,7 +16,7 @@ public final class VerificationTestUtils {
     public static VerificationEntity buildVerificationEntity(Long idVerification) {
         VerificationEntity verificationEntity = new VerificationEntity();
         verificationEntity.setId(idVerification);
-        verificationEntity.setContent(buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID));
+        verificationEntity.setContent(buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID, TEST_FILE_ID, TEST_FILE_ID));
         verificationEntity.setCurator(buildTestCuratorEntity(TEST_CURATOR_ID));
         verificationEntity.setComments(TEST_COMMENT);
         return verificationEntity;
