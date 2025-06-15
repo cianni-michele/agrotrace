@@ -7,7 +7,7 @@ package it.unicam.cs.agrotrace.util.mapper;
  * @param <V> the type of the view object
  * @param <M> the type of the model object
  */
-public interface RestMapper<V, M> {
+public interface ViewMapper<V, M> {
 
     /**
      * Maps a model object to a view object.
