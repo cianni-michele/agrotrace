@@ -2,9 +2,7 @@ package it.unicam.cs.agrotrace.shared.entity.content;
 
 import it.unicam.cs.agrotrace.shared.entity.file.CertificationEntity;
 import it.unicam.cs.agrotrace.shared.entity.file.ImageEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,10 +19,12 @@ public class ProductEntity extends ContentEntity {
     @Column(nullable = false)
     private int quantity;
 
-    @JoinColumn(name = "images", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", nullable = false)
     private List<ImageEntity> images;
 
-    @JoinColumn(name = "certifications", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", nullable = false)
     private List<CertificationEntity> certifications;
 
 }
