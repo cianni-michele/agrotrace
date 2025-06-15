@@ -1,5 +1,6 @@
 package it.unicam.cs.agrotrace.service.notification;
 
+import it.unicam.cs.agrotrace.shared.model.content.Content;
 import it.unicam.cs.agrotrace.shared.model.verification.Verification;
 
 public interface NotificationService {
@@ -11,4 +12,10 @@ public interface NotificationService {
      */
     void notifyAuthor(Verification verification);
 
+    /**
+     * Notify curators about a new product.
+     *
+     * @param content the product to notify curators about
+     */
+    void notifyCurators(Content content);
 }

@@ -1,9 +1,14 @@
 package it.unicam.cs.agrotrace.service.notification;
 
 import it.unicam.cs.agrotrace.exception.NotificationErrorException;
+import it.unicam.cs.agrotrace.repository.UserRepository;
 import it.unicam.cs.agrotrace.service.notification.strategy.NotificationStrategy;
+import it.unicam.cs.agrotrace.shared.entity.user.CuratorEntity;
+import it.unicam.cs.agrotrace.shared.model.content.Content;
 import it.unicam.cs.agrotrace.shared.model.verification.Verification;
+import it.unicam.cs.agrotrace.util.mapper.user.admin.CuratorMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -28,45 +33,103 @@ class MultiChannelNotificationServiceTest {
     private NotificationStrategy failureStrategy;
 
     @Mock
-    private Verification mockVerification;
+    private UserRepository<CuratorEntity> curatorRepository;
 
     private MultiChannelNotificationService notificationService;
 
     @BeforeEach
     void setUp() {
-        notificationService = new MultiChannelNotificationService(List.of(successStrategy, failureStrategy));
+        CuratorMapper curatorMapper = new CuratorMapper();
+
+        notificationService = new MultiChannelNotificationService(
+                List.of(successStrategy, failureStrategy),
+                curatorRepository,
+                curatorMapper
+        );
     }
 
-    @Test
-    void shouldSendNotificationWithAllStrategies() {
-        doNothing().when(successStrategy).sendNotification(mockVerification);
-        doNothing().when(failureStrategy).sendNotification(mockVerification);
+    @Nested
+    class NotifyCuratorsTests {
 
-        notificationService.notifyAuthor(mockVerification);
+        @Test
+        void shouldSendNotificationWithAllStrategies() {
+            doNothing().when(successStrategy).sendNotification(any(), any());
+            doNothing().when(failureStrategy).sendNotification(any(), any());
 
-        verify(successStrategy).sendNotification(mockVerification);
-        verify(failureStrategy).sendNotification(mockVerification);
+            when(curatorRepository.findAll()).thenReturn(List.of(mock(CuratorEntity.class)));
+
+            notificationService.notifyCurators(mock(Content.class));
+
+            verify(successStrategy).sendNotification(any(), any());
+            verify(failureStrategy).sendNotification(any(), any());
+        }
+
+        @Test
+        void shouldSendNotificationOnlyWithSuccessStrategy() {
+            doNothing().when(successStrategy).sendNotification(any(), any());
+            doThrow(ERROR).when(failureStrategy).sendNotification(any(), any());
+
+            when(curatorRepository.findAll()).thenReturn(List.of(mock(CuratorEntity.class)));
+
+            notificationService.notifyCurators(mock(Content.class));
+
+            verify(successStrategy).sendNotification(any(), any());
+            verify(failureStrategy).sendNotification(any(), any());
+        }
+
+        @Test
+        void shouldNotSendNotificationIfAllStrategiesFail() {
+            doThrow(ERROR).when(successStrategy).sendNotification(any(), any());
+            doThrow(ERROR).when(failureStrategy).sendNotification(any(), any());
+
+            when(curatorRepository.findAll()).thenReturn(List.of(mock(CuratorEntity.class)));
+
+            notificationService.notifyCurators(mock(Content.class));
+
+            verify(successStrategy).sendNotification(any(), any());
+            verify(failureStrategy).sendNotification(any(), any());
+
+        }
     }
 
-    @Test
-    void shouldSendNotificationOnlyWithSuccessStrategy() {
-        doNothing().when(successStrategy).sendNotification(mockVerification);
-        doThrow(ERROR).when(failureStrategy).sendNotification(mockVerification);
+    @Nested
+    class NotifyAuthorTests {
 
-        notificationService.notifyAuthor(mockVerification);
+        @Mock
+        private Verification mockVerification;
 
-        verify(successStrategy).sendNotification(mockVerification);
-        verify(failureStrategy).sendNotification(mockVerification);
+        @Test
+        void shouldSendNotificationWithAllStrategies() {
+            doNothing().when(successStrategy).sendNotification(mockVerification);
+            doNothing().when(failureStrategy).sendNotification(mockVerification);
+
+            notificationService.notifyAuthor(mockVerification);
+
+            verify(successStrategy).sendNotification(mockVerification);
+            verify(failureStrategy).sendNotification(mockVerification);
+        }
+
+        @Test
+        void shouldSendNotificationOnlyWithSuccessStrategy() {
+            doNothing().when(successStrategy).sendNotification(mockVerification);
+            doThrow(ERROR).when(failureStrategy).sendNotification(mockVerification);
+
+            notificationService.notifyAuthor(mockVerification);
+
+            verify(successStrategy).sendNotification(mockVerification);
+            verify(failureStrategy).sendNotification(mockVerification);
+        }
+
+        @Test
+        void shouldNotSendNotificationIfAllStrategiesFail() {
+            doThrow(ERROR).when(successStrategy).sendNotification(mockVerification);
+            doThrow(ERROR).when(failureStrategy).sendNotification(mockVerification);
+
+            notificationService.notifyAuthor(mockVerification);
+
+            verify(successStrategy).sendNotification(mockVerification);
+            verify(failureStrategy).sendNotification(mockVerification);
+        }
     }
 
-    @Test
-    void shouldNotSendNotificationIfAllStrategiesFail() {
-        doThrow(ERROR).when(successStrategy).sendNotification(mockVerification);
-        doThrow(ERROR).when(failureStrategy).sendNotification(mockVerification);
-
-        notificationService.notifyAuthor(mockVerification);
-
-        verify(successStrategy).sendNotification(mockVerification);
-        verify(failureStrategy).sendNotification(mockVerification);
-    }
 }
