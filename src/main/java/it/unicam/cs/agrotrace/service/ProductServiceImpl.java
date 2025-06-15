@@ -41,10 +41,9 @@ public class ProductServiceImpl implements ProductService {
         if (!validationResult.isValid()) {
             throw new ProductValidationException(validationResult);
         }
+        ProductEntity entity = productMapper.entityFromModel(product);
 
-        ProductEntity savedEntity = productRepository.save(
-                productMapper.entityFromModel(product)
-        );
+        ProductEntity savedEntity = productRepository.save(entity);
 
         return productMapper.modelFromEntity(savedEntity);
     }

@@ -20,6 +20,7 @@ import static it.unicam.cs.agrotrace.shared.model.content.ValidationStatus.*;
 import static it.unicam.cs.agrotrace.util.AuthorTestUtils.*;
 import static it.unicam.cs.agrotrace.util.ContentTestUtils.*;
 import static it.unicam.cs.agrotrace.util.ContentTestUtils.TEST_CONTENT_ID;
+import static it.unicam.cs.agrotrace.util.UploadedFileTestUtils.TEST_FILE_ID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -77,7 +78,7 @@ class ProductServiceImplTest {
         when(productValidator.validate(product)).thenReturn(validResult(product));
 
         when(productRepository.save(any(ProductEntity.class)))
-                .thenReturn(buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID));
+                .thenReturn(buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID, TEST_FILE_ID, TEST_FILE_ID));
 
         Product expected = buildTestProductContent(TEST_CONTENT_ID, TEST_PRODUCER_ID, PENDING);
         Product actual = productService.saveProduct(product);
