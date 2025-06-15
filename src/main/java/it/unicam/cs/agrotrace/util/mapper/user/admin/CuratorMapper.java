@@ -2,11 +2,11 @@ package it.unicam.cs.agrotrace.util.mapper.user.admin;
 
 import it.unicam.cs.agrotrace.shared.entity.user.CuratorEntity;
 import it.unicam.cs.agrotrace.shared.model.user.admin.Curator;
-import it.unicam.cs.agrotrace.util.mapper.RepositoryMapper;
+import it.unicam.cs.agrotrace.util.mapper.EntityMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CuratorMapper implements RepositoryMapper<Curator, CuratorEntity> {
+public class CuratorMapper implements EntityMapper<Curator, CuratorEntity> {
 
     @Override
     public CuratorEntity entityFromModel(Curator model) {

@@ -7,13 +7,13 @@ import it.unicam.cs.agrotrace.shared.entity.content.ProcessEntity;
 import it.unicam.cs.agrotrace.shared.entity.content.ProductEntity;
 import it.unicam.cs.agrotrace.shared.model.content.*;
 import it.unicam.cs.agrotrace.shared.model.content.Process;
-import it.unicam.cs.agrotrace.util.mapper.RepositoryMapper;
-import it.unicam.cs.agrotrace.util.mapper.RestMapper;
+import it.unicam.cs.agrotrace.util.mapper.EntityMapper;
+import it.unicam.cs.agrotrace.util.mapper.ViewMapper;
 import it.unicam.cs.agrotrace.util.mapper.user.author.AuthorMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ContentMapper implements RestMapper<ContentView, Content>, RepositoryMapper<Content, ContentEntity> {
+public class ContentMapper implements ViewMapper<ContentView, Content>, EntityMapper<Content, ContentEntity> {
 
     private final ProcessMapper processMapper;
 

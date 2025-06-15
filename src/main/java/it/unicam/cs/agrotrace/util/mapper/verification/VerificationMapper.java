@@ -2,13 +2,13 @@ package it.unicam.cs.agrotrace.util.mapper.verification;
 
 import it.unicam.cs.agrotrace.shared.entity.verification.VerificationEntity;
 import it.unicam.cs.agrotrace.shared.model.verification.Verification;
-import it.unicam.cs.agrotrace.util.mapper.RepositoryMapper;
+import it.unicam.cs.agrotrace.util.mapper.EntityMapper;
 import it.unicam.cs.agrotrace.util.mapper.content.ContentMapper;
 import it.unicam.cs.agrotrace.util.mapper.user.admin.CuratorMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VerificationMapper implements RepositoryMapper<Verification, VerificationEntity> {
+public class VerificationMapper implements EntityMapper<Verification, VerificationEntity> {
 
     private final ContentMapper contentMapper;
 
