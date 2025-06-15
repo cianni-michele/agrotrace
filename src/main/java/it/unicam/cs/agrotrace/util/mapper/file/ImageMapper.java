@@ -1,7 +1,7 @@
 package it.unicam.cs.agrotrace.util.mapper.file;
 
 import it.unicam.cs.agrotrace.rest.request.ImageMetadataRequest;
-import it.unicam.cs.agrotrace.service.storage.factory.ImageDetails;
+import it.unicam.cs.agrotrace.shared.model.file.ImageDetails;
 import it.unicam.cs.agrotrace.shared.entity.file.ImageEntity;
 import it.unicam.cs.agrotrace.shared.model.file.Image;
 import it.unicam.cs.agrotrace.util.mapper.EntityMapper;

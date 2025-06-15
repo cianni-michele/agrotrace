@@ -1,7 +1,7 @@
 package it.unicam.cs.agrotrace.util.mapper.file;
 
 import it.unicam.cs.agrotrace.rest.request.CertificationMetadataRequest;
-import it.unicam.cs.agrotrace.service.storage.factory.CertificationDetails;
+import it.unicam.cs.agrotrace.shared.model.file.CertificationDetails;
 import it.unicam.cs.agrotrace.shared.entity.file.CertificationEntity;
 import it.unicam.cs.agrotrace.shared.model.file.Certification;
 import it.unicam.cs.agrotrace.util.mapper.EntityMapper;
