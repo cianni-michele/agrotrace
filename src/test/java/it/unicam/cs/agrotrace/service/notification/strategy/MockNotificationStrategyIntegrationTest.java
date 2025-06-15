@@ -1,11 +1,8 @@
 package it.unicam.cs.agrotrace.service.notification.strategy;
 
 import it.unicam.cs.agrotrace.shared.model.content.Content;
-import it.unicam.cs.agrotrace.shared.model.content.Product;
 import it.unicam.cs.agrotrace.shared.model.user.User;
 import it.unicam.cs.agrotrace.shared.model.verification.Verification;
-import it.unicam.cs.agrotrace.util.AuthorTestUtils;
-import it.unicam.cs.agrotrace.util.ContentTestUtils;
 import it.unicam.cs.agrotrace.util.UserTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
