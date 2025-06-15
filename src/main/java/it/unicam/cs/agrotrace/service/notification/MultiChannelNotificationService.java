@@ -6,7 +6,6 @@ import it.unicam.cs.agrotrace.service.notification.strategy.NotificationStrategy
 import it.unicam.cs.agrotrace.shared.entity.user.CuratorEntity;
 import it.unicam.cs.agrotrace.shared.entity.user.UserEntity;
 import it.unicam.cs.agrotrace.shared.model.content.Content;
-import it.unicam.cs.agrotrace.shared.model.user.AbstractUser;
 import it.unicam.cs.agrotrace.shared.model.user.admin.Curator;
 import it.unicam.cs.agrotrace.shared.model.verification.Verification;
 import it.unicam.cs.agrotrace.util.mapper.user.admin.CuratorMapper;
