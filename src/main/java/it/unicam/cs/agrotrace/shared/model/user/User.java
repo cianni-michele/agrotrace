@@ -15,6 +15,15 @@ public interface User extends UserDetails {
     Long getId();
 
     /**
+     * Returns the email of the user.
+     *
+     * @return the email of the user
+     */
+    default String getEmail(){
+        return getUsername();
+    }
+
+    /**
      * Returns the name of the user.
      *
      * @return the name of the user
