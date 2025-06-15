@@ -40,4 +40,12 @@ public class Product extends AbstractContent {
         this.images = images;
         this.certifications = certifications;
     }
+
+    public void addImage(Image image) {
+        this.images.add(image);
+    }
+
+    public void addCertification(Certification certification) {
+        this.certifications.add(certification);
+    }
 }
