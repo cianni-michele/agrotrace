@@ -7,7 +7,7 @@ package it.unicam.cs.agrotrace.util.mapper;
  * @param <M> the type of the model object
  * @param <E> the type of the entity object
  */
-public interface RepositoryMapper<M, E> {
+public interface EntityMapper<M, E> {
 
     /**
      * Maps a model object to an entity object.
