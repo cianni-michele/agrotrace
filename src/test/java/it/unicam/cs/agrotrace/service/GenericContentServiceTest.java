@@ -22,6 +22,7 @@ import java.util.UUID;
 import static it.unicam.cs.agrotrace.shared.model.content.ValidationStatus.PENDING;
 import static it.unicam.cs.agrotrace.util.AuthorTestUtils.*;
 import static it.unicam.cs.agrotrace.util.ContentTestUtils.*;
+import static it.unicam.cs.agrotrace.util.UploadedFileTestUtils.TEST_FILE_ID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -94,7 +95,7 @@ class GenericContentServiceTest {
         UUID contentId = TEST_CONTENT_ID;
         long authorId = TEST_PRODUCER_ID;
 
-        ContentEntity contentEntity = buildTestProductEntity(contentId, authorId);
+        ContentEntity contentEntity = buildTestProductEntity(contentId, authorId, TEST_FILE_ID, TEST_FILE_ID);
 
         when(contentRepository.findById(contentId)).thenReturn(Optional.of(contentEntity));
 
@@ -124,7 +125,7 @@ class GenericContentServiceTest {
         long authorId1 = TEST_TRANSFORMER_ID;
         long authorId2 = TEST_PRODUCER_ID;
         ContentEntity contentEntity1 = buildTestProcessEntity(contentId1, authorId1);
-        ContentEntity contentEntity2 = buildTestProductEntity(contentId2, authorId2);
+        ContentEntity contentEntity2 = buildTestProductEntity(contentId2, authorId2, TEST_FILE_ID, TEST_FILE_ID);
 
         when(contentRepository.findAllByValidationStatus(status.name())).thenReturn(List.of(contentEntity1, contentEntity2));
 
@@ -176,7 +177,7 @@ class GenericContentServiceTest {
     @Test
     void save_shouldReturnSavedProduct() {
         Content content = buildTestProductContent(null, TEST_PRODUCER_ID, ValidationStatus.PENDING);
-        ContentEntity savedContentEntity = buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID);
+        ContentEntity savedContentEntity = buildTestProductEntity(TEST_CONTENT_ID, TEST_PRODUCER_ID, TEST_FILE_ID, TEST_FILE_ID);
 
         when(contentRepository.save(any(ContentEntity.class))).thenReturn(savedContentEntity);
 
