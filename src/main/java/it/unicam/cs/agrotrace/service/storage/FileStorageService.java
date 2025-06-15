@@ -3,8 +3,6 @@ package it.unicam.cs.agrotrace.service.storage;
 import it.unicam.cs.agrotrace.shared.model.file.FileDetails;
 import it.unicam.cs.agrotrace.service.storage.factory.FileFactory;
 import it.unicam.cs.agrotrace.shared.model.file.UploadedFile;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
