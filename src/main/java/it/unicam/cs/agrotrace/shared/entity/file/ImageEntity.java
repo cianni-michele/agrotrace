@@ -11,11 +11,10 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity
+@Entity(name = "images")
 public class ImageEntity {
 
     @Id
-    @GeneratedValue
     private UUID id;
 
     @Column(nullable = false)

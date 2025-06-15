@@ -11,11 +11,10 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@Entity(name = "certification")
+@Entity(name = "certifications")
 public class CertificationEntity {
 
     @Id
-    @GeneratedValue
     private UUID id;
 
     @Column(nullable = false)
